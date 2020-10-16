@@ -14,20 +14,20 @@ app.get('/list', (req, res) => res.send(lists));
 
 // Get the Schema
 app.get('/list/:id/schema', (req, res) => { 
-    var app = req.params.id;
+    const app = req.params.id;
     res.send(schema[app])
 });
 
 // Get the Data
 app.get('/list/:id', (req, res) => {
-    var app = req.params.id;
-    var limit = parseInt(req.query.limit) || 50;
-    var start = parseInt(req.query.page) || 1;
+    const app = req.params.id;
+    const limit = parseInt(req.query.limit) || 50;
+    const start = parseInt(req.query.page) || 1;
     
-    var total = data[app].length;    
-    var totalpages = Math.ceil(total / limit);
-    var next = start < totalpages ? start + 1 : 0;    
-    var page = (start - 1) * limit;
+    const total = data[app].length;    
+    const totalpages = Math.ceil(total / limit);
+    const next = start < totalpages ? start + 1 : 0;    
+    const page = (start - 1) * limit;
     
     return res.send(
         {
@@ -65,7 +65,7 @@ app.put('/list/:id', (req, res) => {
             { 
                 if(row.WS_ID === item.WS_ID)
                 {
-                    for(var p in item) {
+                    for(const p in item) {
                         row[p] = item[p];
                     }                    
                 }                     
