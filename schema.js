@@ -138,17 +138,7 @@ const products = {
             "Unique": false,
             "System": false,
             "ReadOnly": false
-        },
-        {
-            "Name": "newPrice",
-            "DataType": "System.Decimal",
-            "MaxLength": 0,
-            "AllowNull": true,
-            "Unique": false,
-            "System": false,
-            "ReadOnly": false
-        }
-        
+        }        
     ]
 };
 
