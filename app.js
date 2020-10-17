@@ -48,8 +48,8 @@ app.post('/list/:id', (req, res) => {
     const body = req.body;
         
     body.items.forEach(item => {    
-        const next_id = Math.max.apply(Math, data[app].map(p => p.WS_ID)) + 1;
-        data[app].push({...item, WS_ID: next_id});
+        const next_id = Math.max.apply(Math, data[app].map(p => p.Unique_ID)) + 1;
+        data[app].push({...item, Unique_ID: next_id});
     });
 
     res.send({ success: true });
@@ -63,7 +63,7 @@ app.put('/list/:id', (req, res) => {
     body.items.forEach(item => {
         data[app].forEach(row => 
             { 
-                if(row.WS_ID === item.WS_ID)
+                if(row.Unique_ID === item.Unique_ID)
                 {
                     for(const p in item) {
                         row[p] = item[p];
@@ -80,8 +80,8 @@ app.delete('/list/:id', (req, res) => {
     const app = req.params.id;
     const body = req.body;
     
-    const todelete = body.items.map(p => p.WS_ID);        
-    data[app] = data[app].filter(row => !todelete.includes(row.WS_ID));
+    const todelete = body.items.map(p => p.Unique_ID);        
+    data[app] = data[app].filter(row => !todelete.includes(row.Unique_ID));
 
     res.send({ success: true });
 });

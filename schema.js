@@ -1,51 +1,15 @@
 const products = {
-    "UpdateKeyColumn": "WS_ID",
+    "UpdateKeyColumn": "Unique_ID",
     "UpdateKeyColumnDataType": "System.Int32",
     "BlobNameColumnFormat": null,
     "BlobUrlFormat": null,
     "Columns": [
         {
-            "Name": "WS_ID",
+            "Name": "Unique_ID",
             "DataType": "System.Int32",
             "MaxLength": 0,
             "AllowNull": false,
             "Unique": true,
-            "System": true,
-            "ReadOnly": false
-        },
-        {
-            "Name": "WS_UID",
-            "DataType": "System.Guid",
-            "MaxLength": 0,
-            "AllowNull": false,
-            "Unique": false,
-            "System": true,
-            "ReadOnly": false
-        },
-        {
-            "Name": "WS_Created",
-            "DataType": "System.DateTime",
-            "MaxLength": 0,
-            "AllowNull": false,
-            "Unique": false,
-            "System": true,
-            "ReadOnly": false
-        },
-        {
-            "Name": "WS_Updated",
-            "DataType": "System.DateTime",
-            "MaxLength": 0,
-            "AllowNull": false,
-            "Unique": false,
-            "System": true,
-            "ReadOnly": false
-        },
-        {
-            "Name": "WS_Partition",
-            "DataType": "System.Int32",
-            "MaxLength": 0,
-            "AllowNull": false,
-            "Unique": false,
             "System": true,
             "ReadOnly": false
         },
