@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express');
 const data = require("./data");
 const schema = require("./schema");
@@ -46,10 +48,11 @@ app.get('/list/:id', (req, res) => {
 app.post('/list/:id', (req, res) => {
     const app = req.params.id;
     const body = req.body;
-        
+    const key = schema[app].UpdateKeyColumn;
+
     body.items.forEach(item => {    
-        const next_id = Math.max.apply(Math, data[app].map(p => p.Unique_ID)) + 1;
-        data[app].push({...item, Unique_ID: next_id});
+        const next_id = Math.max.apply(Math, data[app].map(p => p[key])) + 1;
+        data[app].push({...item, [key]: next_id });
     });
 
     res.send({ success: true });
@@ -59,17 +62,15 @@ app.post('/list/:id', (req, res) => {
 app.put('/list/:id', (req, res) => {
     const app = req.params.id;
     const body = req.body;
-    
+    const key = schema[app].UpdateKeyColumn;
+
     body.items.forEach(item => {
-        data[app].forEach(row => 
-            { 
-                if(row.Unique_ID === item.Unique_ID)
-                {
-                    for(const p in item) {
-                        row[p] = item[p];
-                    }                    
-                }                     
-            });
+        data[app]
+            .filter(row => row[key] === item[key])
+            .forEach(row => 
+                { 
+                    for(let p in item) row[p] = item[p]; 
+                });
     });
 
     res.send({ success: true });
@@ -79,9 +80,10 @@ app.put('/list/:id', (req, res) => {
 app.delete('/list/:id', (req, res) => {
     const app = req.params.id;
     const body = req.body;
-    
-    const todelete = body.items.map(p => p.Unique_ID);        
-    data[app] = data[app].filter(row => !todelete.includes(row.Unique_ID));
+    const key = schema[app].UpdateKeyColumn;
+
+    const todelete = body.items.map(p => p[key]);        
+    data[app] = data[app].filter(row => !todelete.includes(row[key]));
 
     res.send({ success: true });
 });
